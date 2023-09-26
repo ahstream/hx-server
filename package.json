@@ -4,9 +4,10 @@
   "description": "Hx Misc Servers",
   "type": "module",
   "scripts": {
-    "start:twitter": "nodemon src/twitter/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "wip": "git add . && git commit -m \"wip\"",
+    "sampleWebsite": "nodemon src/sample-website/server.js",
+    "twitterServer": "nodemon src/twitter/server.js",
+    "twitterStream": "node script/startTwitterStream.js",
+    "tweetdecks": "node script/openTweetdecks.js",
     "null": ""
   },
   "dependencies": {
@@ -16,10 +17,9 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
     "express": "^4.17.1",
     "needle": "^3.2.0",
-    "nodemon": "^2.0.22",
-    "open": "^9.1.0",
-    "pug": "^3.0.0"
+    "nodemon": "^2.0.22"
   }
 }

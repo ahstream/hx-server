@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { ping, handleTweet } from './ping.js';
 import { startStream } from './stream.js';
-import config from '../../config/config.js';
+import config from './config/config.js';
 import pkg from '@ahstream/hx-lib';
 const { extractURLs } = pkg;
 
@@ -21,6 +21,10 @@ app.use(cors({ origin: '*' }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 
 app.post('/ping', async function (req, res) {
   return ping(req, res, state);

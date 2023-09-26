@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+  <body class="container">
+    <header><%- include('../partials/header'); %></header>
+
+    <main>
+      <div class="jumbotron">
+        <h1>This is great</h1>
+        <p>Welcome to templating using EJS</p>
+
+        <h2>Variable</h2>
+        <p><%= tagline %></p>
+      </div>
+
+      <!-- Display a connect button and the current account -->
+      <button class="enableEthereumButton">Connect Ethereum Wallet</button>
+      <h2>
+        Wallets: <br />
+        <span class="showAccount"></span>
+      </h2>
+    </main>
+
+    <footer><%- include('../partials/footer'); %></footer>
+
+    <script>
+      console.log('window.ethereum', window.ethereum);
+
+      const ethereumButton = document.querySelector('.enableEthereumButton');
+      const showAccount = document.querySelector('.showAccount');
+
+      ethereumButton.addEventListener('click', () => {
+        if (!window.ethereum) {
+          return window.alert('No Ethereum wallet found!');
+        }
+        getAccount();
+      });
+
+      // MetaMask rejects any additional requests while the first is still pending.
+      async function getAccount() {
+        ethereumButton.disabled = true;
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }).catch((err) => {
+          ethereumButton.disabled = false;
+          if (err.code === 4001) {
+            // EIP-1193 userRejectedRequest error
+            // If this happens, the user rejected the connection request.
+            console.log('Please connect to MetaMask.');
+          } else {
+            console.error(err);
+          }
+        });
+        ethereumButton.disabled = false;
+        const accountsHTML = accounts.join('<br>');
+        showAccount.innerHTML = accountsHTML;
+      }
+    </script>
+  </body>
+</html>

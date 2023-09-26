@@ -1,7 +1,7 @@
 import pkg from '@ahstream/hx-lib';
 const { openInChrome } = pkg;
 
-import config from '../../config/config.js';
+import config from './config/config.js';
 
 export function openBrowsers(numBrowsers = null, url = null) {
   console.log('numBrowsers, url', numBrowsers, url);

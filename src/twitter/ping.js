@@ -1,10 +1,6 @@
 import pkg from '@ahstream/hx-lib';
 const { openInChrome, convertTwitterSnowflakeToDate, dateLogStr } = pkg;
 
-function isValidLink(text) {
-  // if (link.href.includes('forms.gle') || link.href.includes('t.co') || link.href.includes('docs.google.com')) {
-}
-
 export function handleTweet(data, state) {
   const ignoreSeenURLs = state.config.twitter.ignoreSeenURLs;
 
@@ -54,13 +50,10 @@ export function handleTweet(data, state) {
 }
 
 export async function ping(req, res, state) {
-  // console.log(dateLogStr(), 'body', req.body);
-
   if (!req.body) {
     console.log(dateLogStr(), 'Ignore, invalid data!', req.body);
     return res.send('pong');
   }
-
   handleTweet(
     {
       urls: req.body.urls,
@@ -69,6 +62,5 @@ export async function ping(req, res, state) {
     },
     state
   );
-
   res.send('pong');
 }
